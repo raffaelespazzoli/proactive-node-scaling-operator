@@ -126,6 +126,7 @@ bundle-build:
 # Generate helm chart
 helmchart: kustomize
 	mkdir -p ./charts/${OPERATOR_NAME}/templates
+	mkdir -p ./charts/${OPERATOR_NAME}/crds
 	cp ./config/helmchart/templates/* ./charts/${OPERATOR_NAME}/templates
 	$(KUSTOMIZE) build ./config/helmchart | sed 's/release-namespace/{{.Release.Namespace}}/' > ./charts/${OPERATOR_NAME}/templates/rbac.yaml
 	$(KUSTOMIZE) build ./config/crd > ./charts/${OPERATOR_NAME}/crds/crds.yaml
